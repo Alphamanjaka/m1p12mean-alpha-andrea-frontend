@@ -1,16 +1,18 @@
 import { AngularAppEngine, createRequestHandler } from '@angular/ssr';
 import { getContext } from '@netlify/angular-runtime/context.mjs';
-
 const angularAppEngine = new AngularAppEngine();
 
 /**
  * Fonction qui définit les paramètres de pré-rendu
  */
-export function getPrerenderParams() {
-  return {
-    '/login/:role': ['admin', 'user', 'guest'] // Liste des rôles acceptés pour la pré-rendition
-  };
-}
+export const getPrerenderParams = async () => {
+  return [
+    { role: 'admin' },
+    { role: 'client' },
+    { role: 'employe' },
+  ];
+};
+
 
 /**
  * Gestionnaire des requêtes Netlify
