@@ -27,7 +27,7 @@ fetchServices() {
   this.serviceServices.getServices()
     .subscribe(
       data => {
-        console.log('Données reçues :', data);
+        // console.log('Données reçues :', data);
         this.servicesList = data.slice(0, 4);
       },
       error => console.error('Erreur lors de la récupération des services :', error)
