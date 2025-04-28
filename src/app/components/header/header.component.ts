@@ -10,6 +10,13 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  logIn() {
+    this.router.navigate(["/login"])
+  }
+  
+  signIn() {
+    this.router.navigate(["/signin"])
+  }
   constructor(private router: Router) { }
 
 goToServicePage() {

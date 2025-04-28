@@ -30,7 +30,7 @@ export class LoginComponent {
   ) { }
 
   ngOnInit() {
-    this.login.role = this.route.snapshot.params['role'];
+    this.login.role = this.route.snapshot.params['role'] ?? 'client'; 
     if (this.login.role == 'client') {
       this.login.username = 'client1';
       this.login.password = 'client1';

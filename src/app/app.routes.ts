@@ -17,8 +17,9 @@ export const routes: Routes = [
   { path: 'offers', component: OfferListComponent },
 
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'login/:role', component: LoginComponent,
+    { path: 'login/:role?', component: LoginComponent,
         data: { renderMode: 'client' } },
+    { path: 'login', component: LoginComponent },
     { path: 'signin', component: InscriptionComponent },
     // { path: 'unaffected-task', component: UnaffectedTaskComponent },
     // { path: 'current-task', component: CurrentTaskComponent },
