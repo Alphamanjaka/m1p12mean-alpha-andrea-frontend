@@ -11,56 +11,40 @@ import { EmployeManagementComponent } from './templates/admin/employe-management
 import { StockManagementComponent } from './templates/admin/stock-management/stock-management.component';
 import { TasksComponent } from './templates/employe/tasks/tasks.component';
 import { InscriptionComponent } from './components/inscription/inscription.component';
+import { getPrerenderParams } from '../server';
+
 
 export const routes: Routes = [
-    { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'offers', component: OfferListComponent },
 
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'login/:role', component: LoginComponent },
-    { path: 'signin', component: InscriptionComponent },
-    // { path: 'unaffected-task', component: UnaffectedTaskComponent },
-    // { path: 'current-task', component: CurrentTaskComponent },
-    // { path: 'finished-task', component: FinishedTaskComponent },
-    {
-        path: 'client', component: TemplateClientComponent,
-        children: [
-            {
-                path: '', component: OfferListComponent
-            },
-            {
-                path: 'services', component: ServiceListComponent
-            },
-            {
-                path: 'offers', component: OfferListComponent
-            }
-        ],
-    },
-    {
-        path: 'admin', component: TemplateAdminComponent,
-        children: [
-            { path: '', component: DashboardComponent },
-            { path: 'employee-mgmt', component: EmployeManagementComponent },
-            { path: 'stock-mgmt', component: StockManagementComponent },
-            { path: 'dashboard', component: DashboardComponent }
-        ],
-    },
-    {
-        path: 'employe', component: TemplateEmployeComponent,
-        children: [
-            {
-                path: 'tasks', component: TasksComponent,
-            },
-            {
-                path: '', component: TasksComponent,
-            }
-        ]
-    }
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: '' },
+  {
+    path: 'login/:role', component: LoginComponent,
+    data: { prerender: true },
+    resolve: { prerenderParams: getPrerenderParams },
+  },
+  { path: 'signin', component: InscriptionComponent },
+  // { path: 'unaffected-task', component: UnaffectedTaskComponent },
+  // { path: 'current-task', component: CurrentTaskComponent },
+  // { path: 'finished-task', component: FinishedTaskComponent },
+
+  {
+    path: 'admin',
+    component: TemplateAdminComponent,
+    loadChildren: () => import('./pages/admin/admin.routes').then(m => m.ADMIN_ROUTES),
+  },
+  {
+    path: 'employe',
+    component: TemplateEmployeComponent,
+    loadChildren: () => import('./pages/employe/employe.routes').then(m => m.EMPLOYE_ROUTES),
+  },
+  {
+    path: 'client',
+    component: TemplateClientComponent,
+    loadChildren: () => import('./pages/client/client.routes').then(m => m.CLIENT_ROUTES),
+  },
 ];
-export const getPrerenderParams = async () => {
-  return [
-    { role: 'admin' },
-    { role: 'client' },
-    { role: 'employe' },
-  ];
-};
+
+export const APP_ROUTES = routes;

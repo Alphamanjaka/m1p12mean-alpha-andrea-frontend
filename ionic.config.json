@@ -1,0 +1,7 @@
+{
+  "name": "m1p12mean-andrea-alpha",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

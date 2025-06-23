@@ -3,18 +3,6 @@ import { getContext } from '@netlify/angular-runtime/context.mjs';
 const angularAppEngine = new AngularAppEngine();
 
 /**
- * Fonction qui définit les paramètres de pré-rendu
- */
-export const getPrerenderParams = async () => {
-  return [
-    { role: 'admin' },
-    { role: 'client' },
-    { role: 'employe' },
-  ];
-};
-
-
-/**
  * Gestionnaire des requêtes Netlify
  */
 export async function netlifyAppEngineHandler(request: Request): Promise<Response> {
@@ -35,3 +23,11 @@ export async function netlifyAppEngineHandler(request: Request): Promise<Respons
  * Gestionnaire de requêtes pour Netlify et Angular CLI
  */
 export const reqHandler = createRequestHandler(netlifyAppEngineHandler);
+
+export const getPrerenderParams = async () => {
+  return [
+    { role: 'admin' },
+    { role: 'client' },
+    { role: 'employe' },
+  ];
+};
